@@ -10,7 +10,8 @@
     "deploy": "npm run build && wrangler pages deploy ./dist"
   },
   "dependencies": {
-    "vue": "^3.4.21",
+    "@chenfengyuan/vue-countdown": "^2.1.2",
+    "vue": "^3.4.27",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
