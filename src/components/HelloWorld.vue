@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-
+<h1>hello world vue</h1>
 </template>
 
 <style scoped>
