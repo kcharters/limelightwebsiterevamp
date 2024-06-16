@@ -1,10 +1,8 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import Nav from '../components/nav.vue'
 </script>
-
 <template>
-  <main>
-    <h1>homepage vue</h1>
-    <TheWelcome />
-  </main>
+<v-app>
+<Nav/>
+</v-app>
 </template>
