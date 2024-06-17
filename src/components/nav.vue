@@ -2,8 +2,11 @@
 
 
 export default {
-  name: "my-component",
-
+    drawer: false,
+    tab: null,
+      items: [
+        'web', 'shopping', 'videos', 'images', 'news',
+      ],
 }
 
 </script>
@@ -14,7 +17,6 @@ export default {
         </template>
 
         <v-app-bar-title>LimeLight SMP</v-app-bar-title>
-
 
     <!-- Add a navigation bar -->
     <template v-slot:append>
@@ -47,7 +49,5 @@ export default {
 </template>
 
 <style scoped>
-@media screen and (max-width: 360px) {
 
-}
 </style>
