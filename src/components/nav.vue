@@ -1,13 +1,18 @@
-<script >
+<script setup>
+import { computed, unref } from 'vue'
+import { useDisplay } from 'vuetify'
 
-export default{
-  data() {
-   var drawer= false;
-   var tab= null;
-   var items= ['web', 'shopping', 'videos', 'images', 'news']
-   return { drawer, tab, items }
-  }
-}
+const display = useDisplay()
+const isMobile = computed(() => {
+  return unref(display.smAndDown)
+})
+
+const items = [
+  { title: 'Click Me' },
+  { title: 'Click Me' },
+  { title: 'Click Me' },
+  { title: 'Click Me 2' },
+]
 </script>
 <template>
   <v-app-bar :elevation="2">
@@ -16,20 +21,23 @@ export default{
     </template>
 
     <v-app-bar-title>LimeLight SMP</v-app-bar-title>
+    <v-toolbar-items class="hidden-sm-and-down">
+      <v-btn>Limes</v-btn>
+      <v-btn>Links</v-btn>
+    </v-toolbar-items>
 
     <!-- Add a navigation bar -->
-    <template v-slot:append>
-      <v-app-bar-nav-icon @click="drawer = true" class="d-flex d-sm-none"></v-app-bar-nav-icon>
-    </template>
-    <v-navigation-drawer v-model="drawer" absolute temporary>
-      <v-list nav dense>
-
-          <v-list-item v-for="(item, index) in items">
-            <v-list-item-title @click="tab = index">{{ item }}</v-list-item-title>
-          </v-list-item>
-
+    <v-menu v-if="isMobile">
+      <template v-slot:activator="{ props }">
+        <v-app-bar-nav-icon color="primary" v-bind="props">
+        </v-app-bar-nav-icon>
+      </template>
+      <v-list>
+        <v-list-item v-for="(item, index) in items" :key="index" :value="index">
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-menu>
 
     <!-- Navigation bar ends -->
   </v-app-bar>
