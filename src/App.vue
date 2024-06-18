@@ -4,11 +4,9 @@ import Home from '../src/views/HomeView.vue'
 </script>
 
 <template>
-
-<Home/>
-
+    <v-app>
+        <Home />
+    </v-app>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
