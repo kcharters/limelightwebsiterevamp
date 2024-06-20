@@ -44,4 +44,6 @@ const items = [
 
 </template>
 
-<style scoped></style>
+<style >
+
+</style>

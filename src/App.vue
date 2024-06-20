@@ -9,4 +9,6 @@ import Home from '../src/views/HomeView.vue'
     </v-app>
 </template>
 
-<style scoped></style>
+<style>
+
+</style>
