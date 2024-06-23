@@ -1,22 +1,57 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { onMounted } from "vue";
+import axios from "redaxios";
 
-async function fetchTwitchData() {
-        const catFactsResponse = await axios.get('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=5')
-        catFacts.value = catFactsResponse.data
-    }
+const channelList = [
+  "omnimorris",
+  "campslapaa",
+  "Fireheart20198",
+  "GoofeeGoobed",
+  "IcedTeaza",
+  "Indie_Outlaw",
+  "KrystalDad",
+  "Levidmorris",
+  "lordandrilton",
+  "micro_piglet",
+  "Mistfit__",
+  "MomoiroMilo",
+  "nightowl35",
+  "RayTG_",
+  "rellacthespacenerd",
+  "SilverSlushie",
+  "Wilvis0514",
+];
 
+const channels = {};
+const selectedChannel = null;
+const channelToAdd = "";
+
+const params = new URLSearchParams();
+
+params.append("clientID", import.meta.env.VITE_CLIENT_ID);
+params.append("clientSecret", import.meta.env.VITE_CLIENT_SECRET);
+params.append("grantType", import.meta.env.VITE_GRANT_TYPE);
+
+const url = "http://id.twitch.tv/oauth2";
+
+const config = {
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+};
+
+async function fetchTwitchAuth() {
+  console.log("pretest");
+  const response = await axios.post(url, params, config);
+  console.log(response.data);
+  console.log("test");
+}
 
 onMounted(async () => {
-        await fetchTwitchData()
-    })
+  fetchTwitchAuth();
+});
 </script>
 
-<template>
+<template></template>
 
-
-</template>
-
-<style>
-</style>
+<style></style>
