@@ -32,18 +32,19 @@ params.append("clientID", import.meta.env.VITE_CLIENT_ID);
 params.append("clientSecret", import.meta.env.VITE_CLIENT_SECRET);
 params.append("grantType", import.meta.env.VITE_GRANT_TYPE);
 
-const url = "http://id.twitch.tv/oauth2";
+const url = "https://id.twitch.tv/oauth2/token";
 
 const config = {
   headers: {
+    "Accept": "*/*",
     "Content-Type": "application/x-www-form-urlencoded",
-  },
+  }
 };
 
 async function fetchTwitchAuth() {
   console.log("pretest");
   const response = await axios.post(url, params, config);
-  console.log(response.data);
+  console.log(response);
   console.log("test");
 }
 

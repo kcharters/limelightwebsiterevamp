@@ -32,3 +32,6 @@ coverage
 # wrangler files
 .wrangler
 .dev.vars
+
+#environtment variables
+.env

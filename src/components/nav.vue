@@ -17,7 +17,7 @@ const items = [
 <template>
   <v-app-bar :elevation="2">
     <template v-slot:prepend>
-      <img src="@\assets\ll_logo.png" width="100" height="100" />
+      <img src="@\assets\ll_logo.png" width="75" height="75vh" />
     </template>
 
     <v-app-bar-title>LimeLight SMP</v-app-bar-title>
