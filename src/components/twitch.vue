@@ -3,24 +3,64 @@ export default {
     name: 'twitch',
     data: function () {
         return {
-            whoIsLive: [],
+            whoIsLive: ["omnimorris",
+                "campslapaa",
+                "Fireheart20198",
+                "GoofeeGoobed",
+                "IcedTeaza",
+                "Indie_Outlaw",
+                "KrystalDad",
+                "Levidmorris",
+                "lordandrilton",
+                "micro_piglet",
+                "Mistfit__",
+                "MomoiroMilo",
+                "nightowl35",
+                "RayTG_",
+                "rellacthespacenerd",
+                "SilverSlushie",
+                "Wilvis0514"],
         }
     },
     methods: {
         fetchToken: function () {
+            const whoIsLive = ["omnimorris",
+                "campslapaa",
+                "Fireheart20198",
+                "GoofeeGoobed",
+                "IcedTeaza",
+                "Indie_Outlaw",
+                "KrystalDad",
+                "Levidmorris",
+                "lordandrilton",
+                "micro_piglet",
+                "Mistfit__",
+                "MomoiroMilo",
+                "nightowl35",
+                "RayTG_",
+                "rellacthespacenerd",
+                "SilverSlushie",
+                "Wilvis0514"]
+
             const client_id = import.meta.env.CLIENT_ID;
-            const client_secret = import.meta.env.CLIENT_SECRET;
-            let url = "https://api.allorigins.win/get?url="+"https://id.twitch.tv/oauth2/token"
-            fetch(url, {
-                method: 'post',
-                headers: new Headers({
-                    'Accept': 'application/vnd.twitchtv.v5+json',
-                    'Content-Type': 'application/json',
-                }),
-            }).then(res => {
-                console.log(res);
-                // this.twitchAccessToken = res.data.access_token;
-            })
+            const access_token = import.meta.env.ACCESS_TOKEN;
+
+            for (let i = 0; i < whoIsLive.length; i++) {
+                let url = "https://api.twitch.tv/helix/streams" + whoIsLive[i] + "?callback=?";
+
+
+                fetch(url, {
+                    method: 'post',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + access_token,
+                        'Client-ID': client_id
+                    }),
+                }).then(function (response) {
+                    return response.json();
+                }).then(data => {
+                    console.log(data)
+                })
+            }
         }
 
     },
