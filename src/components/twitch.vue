@@ -3,28 +3,12 @@ export default {
     name: 'twitch',
     data: function () {
         return {
-            whoIsLive: ["omnimorris",
-                "campslapaa",
-                "Fireheart20198",
-                "GoofeeGoobed",
-                "IcedTeaza",
-                "Indie_Outlaw",
-                "KrystalDad",
-                "Levidmorris",
-                "lordandrilton",
-                "micro_piglet",
-                "Mistfit__",
-                "MomoiroMilo",
-                "nightowl35",
-                "RayTG_",
-                "rellacthespacenerd",
-                "SilverSlushie",
-                "Wilvis0514"],
+            whoislive: [],
         }
     },
     methods: {
         fetchToken: function () {
-            const whoIsLive = ["omnimorris",
+            const limes = ["omnimorris",
                 "campslapaa",
                 "Fireheart20198",
                 "GoofeeGoobed",
@@ -42,15 +26,14 @@ export default {
                 "SilverSlushie",
                 "Wilvis0514"]
 
-            const client_id = import.meta.env.CLIENT_ID;
-            const access_token = import.meta.env.ACCESS_TOKEN;
+            const client_id = import.meta.env.VITE_CLIENT_ID;
+            const access_token = import.meta.env.VITE_ACCESS_TOKEN;
 
-            for (let i = 0; i < whoIsLive.length; i++) {
-                let url = "https://api.twitch.tv/helix/streams" + whoIsLive[i] + "?callback=?";
-
+            for (let i = 0; i < limes.length; i++) {
+                let url = "https://api.twitch.tv/helix/streams?user_login=" + limes[i].toLowerCase();
 
                 fetch(url, {
-                    method: 'post',
+                    method: 'get',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + access_token,
                         'Client-ID': client_id
@@ -58,7 +41,17 @@ export default {
                 }).then(function (response) {
                     return response.json();
                 }).then(data => {
-                    console.log(data)
+
+                    let whoislive = []
+
+                    for(var key in data.data){
+                        whoislive.push({
+                            streamtype: data.data[key].type,
+                            streamname: data.data[key].user_name
+                        })
+                        this.whoislive = whoislive
+                    }
+
                 })
             }
         }
@@ -70,5 +63,7 @@ export default {
 }
 </script>
 <template>
-
+<div v-for="users in whoislive">
+    <p>{{ users.streamname }}</p>
+</div>
 </template>
