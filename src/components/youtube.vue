@@ -10,41 +10,47 @@ export default {
         fetchChannel: function () {
 
             const api_key = import.meta.env.VITE_YOUTUBE_API;
+            const limes = ["Omnimorris",
+                "64lava",
+                "Aenay",
+                "CampSlapaa",
+                "GenuineChili",
+                "GoofeeGoobed",
+                "KrystalDad",
+                "IcedTeaza",
+                "koskaLCMER",
+                "Levidmorris",
+                "micropig5",
+                "MomoiroMilo",
+                "TheMrGoob",
+                "Nightowlmc",
+                "RayTG_",
+                "SilverSlushie",
+                "Sicksid3534",
+                "Tworata",
+                "VolitideYT",
+                "Wilvis0514"
+            ]
 
-            const youtubeapiurl = new URL("https://www.googleapis.com/youtube/v3/channels")
-            youtubeapiurl.searchParams.set("part", "snippet")
-            youtubeapiurl.searchParams.set("forHandle", "limelightsmp")
-            youtubeapiurl.searchParams.set("key", api_key)
+            const youtubechannelurl = new URL("https://www.googleapis.com/youtube/v3/channels")
 
-            fetch(youtubeapiurl, {
+            youtubechannelurl.searchParams.set("key", api_key)
+            limes.forEach((lime)=>{
+                youtubechannelurl.searchParams.set("part", "contentDetails")
+                youtubechannelurl.searchParams.set("forHandle", lime)
+                fetch(youtubechannelurl, {
                     method: 'get',
 
                 }).then(function (response) {
                     return response.json();
                 }).then(data => {
-                    for (const x of data.items)
-                    {
-                        return this.channelid = x.id
-                    }
-
-                }).then(function(data){
-                    console.log(data)
-                    const sectionsurl = new URL("https://www.googleapis.com/youtube/v3/channelSections")
-                    sectionsurl.searchParams.set("part", "snippet")
-                    sectionsurl.searchParams.set("key", api_key)
-                    sectionsurl.searchParams.set("channelId",data)
-
-                    fetch(sectionsurl,{
-                        method: 'get',
-                    }).then(function (response) {
-                    return response.json();
-                }).then(data=>{
                     console.log(data)
                 })
-                })
+            })
+            //end of for statement
 
         },
-        fetchSection: function(){
+        fetchSection: function () {
 
         }
 
