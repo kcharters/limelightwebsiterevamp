@@ -9,9 +9,6 @@ const isMobile = computed(() => {
 
 const items = [
   { title: 'Limes' },
-  { title: 'Click Me' },
-  { title: 'Click Me' },
-  { title: 'Click Me 2' },
 ]
 </script>
 <template>
@@ -22,7 +19,8 @@ const items = [
 
     <v-app-bar-title>LimeLight SMP</v-app-bar-title>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn>Limes</v-btn>
+      <router-link :to="{ name: 'limes' }">
+        <v-btn>Limes</v-btn></router-link>
       <v-btn>Links</v-btn>
     </v-toolbar-items>
 
@@ -44,6 +42,4 @@ const items = [
 
 </template>
 
-<style >
-
-</style>
+<style></style>

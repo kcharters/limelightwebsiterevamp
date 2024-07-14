@@ -3,66 +3,45 @@ export default {
     name: 'youtube',
     data: function () {
         return {
-            channelid: "",
+            videos: null,
         }
     },
     methods: {
-        fetchChannel: function () {
+        fetchChannel(){
 
             const api_key = import.meta.env.VITE_YOUTUBE_API;
-            const limes = ["Omnimorris",
-                "64lava",
-                "Aenay",
-                "CampSlapaa",
-                "GenuineChili",
-                "GoofeeGoobed",
-                "KrystalDad",
-                "IcedTeaza",
-                "koskaLCMER",
-                "Levidmorris",
-                "micropig5",
-                "MomoiroMilo",
-                "TheMrGoob",
-                "Nightowlmc",
-                "RayTG_",
-                "SilverSlushie",
-                "Sicksid3534",
-                "Tworata",
-                "VolitideYT",
-                "Wilvis0514"
-            ]
 
-            const youtubechannelurl = new URL("https://www.googleapis.com/youtube/v3/channels")
+            const youtubechannelurl = new URL("https://www.googleapis.com/youtube/v3/playlistItems")
 
             youtubechannelurl.searchParams.set("key", api_key)
-            limes.forEach((lime)=>{
-                youtubechannelurl.searchParams.set("part", "contentDetails")
-                youtubechannelurl.searchParams.set("forHandle", lime)
-                fetch(youtubechannelurl, {
-                    method: 'get',
 
-                }).then(function (response) {
-                    return response.json();
-                }).then(data => {
-                    console.log(data)
+            youtubechannelurl.searchParams.set("part", "snippet")
+            youtubechannelurl.searchParams.set("playlistId", "PLLPqZJRXAEj6kEVhrE7gcSZip9a_5usQ4")
+            fetch(youtubechannelurl, {
+                method: 'get',
+
+            }).then(function (response) {
+                return response.json();
+            }).then(data => {
+                const items = data.items
+                return items.map((item)=>{
+
+                    const videoId = item.snippet.resourceId.videoId
+                    this.videos = "https://www.youtube.com/embed/".concat(videoId)
                 })
+
             })
-            //end of for statement
 
         },
-        fetchSection: function () {
-
-        }
 
     },
     mounted() {
         this.fetchChannel()
-        this.fetchSection()
     }
 }
 </script>
 <template>
     <div>
-        <!---- <embed src="videos.videoEmbedUrl"></embed> -->
+        <embed :src="videos"></embed>
     </div>
 </template>
