@@ -44,10 +44,13 @@ export default {
 
                     let whoislive = []
 
-                    for(var key in data.data){
+                    for (var key in data.data) {
                         whoislive.push({
                             streamtype: data.data[key].type,
-                            streamname: data.data[key].user_name
+                            streamname: data.data[key].user_name,
+                            streamtitle: data.data[key].title,
+                            gamename: data.data[key].game_name,
+                            thumbnail: data.data[key].thumbnail_url
                         })
                         this.whoislive = whoislive
                     }
@@ -63,7 +66,23 @@ export default {
 }
 </script>
 <template>
-<div v-for="users in whoislive">
-    <p>{{ users.streamname }}</p>
-</div>
+    <v-container>
+        Live now on twitch! :
+        <v-row dense>
+            <v-col cols="12">
+                <div v-for=" users in whoislive">
+                    <v-card variant="tonal" hover>
+                        <v-card-title>{{ users.streamname }}</v-card-title>
+                        <v-card-subtitle>{{ users.gamename }}</v-card-subtitle>
+                        <v-card-text>{{ users.streamtitle }}</v-card-text>
+                        <v-card-actions>
+                            <a :href="'https://www.twitch.tv/' + users.streamname"
+                                target="_blank"><v-btn>{{ users.streamname }}</v-btn></a>
+                        </v-card-actions>
+
+                    </v-card>
+                </div>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>

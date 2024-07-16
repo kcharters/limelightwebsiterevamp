@@ -17,7 +17,6 @@ export default {
 
             youtubechannelurl.searchParams.set("part", "snippet")
             youtubechannelurl.searchParams.set("playlistId", "PLLPqZJRXAEj6kEVhrE7gcSZip9a_5usQ4")
-            youtubechannelurl.searchParams.set("maxResults", 5)
 
             fetch(youtubechannelurl, {
                 method: 'get',
@@ -58,7 +57,14 @@ export default {
 }
 </script>
 <template>
-    <div v-for="video in latestvideo">
+    <v-infinite-scroll
+    direction="horizontal"
+    @load="empty"
+  >
+    <template v-for="video in latestvideo">
+        <div :class="['pa-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
         <embed :src="video.videoEmbedUrl"/>
     </div>
+    </template>
+</v-infinite-scroll>
 </template>

@@ -12,16 +12,17 @@ const items = [
 ]
 </script>
 <template>
-  <v-app-bar :elevation="2">
+  <v-app-bar :elevation="24" :density="compact" class="pr-10">
     <template v-slot:prepend>
-      <img src="@\assets\ll_logo.png" width="75" height="75vh" />
+      <router-link :to="{ name: 'home' }"><img src="@\assets\ll_logo.png" width="75" height="75vh" /></router-link>
     </template>
-
     <v-app-bar-title>LimeLight SMP</v-app-bar-title>
-    <v-toolbar-items class="hidden-sm-and-down">
-      <router-link :to="{ name: 'limes' }">
-        <v-btn>Limes</v-btn></router-link>
-      <v-btn>Links</v-btn>
+
+    <v-toolbar-items class="hidden-sm-and-down" v-for="(item, index) in items" :key="index" :value="index">
+      <router-link :to="{ name: item.title.toLowerCase() }" class="v-btn">
+        Limes
+        </router-link>
+
     </v-toolbar-items>
 
     <!-- Add a navigation bar -->
@@ -32,7 +33,9 @@ const items = [
       </template>
       <v-list>
         <v-list-item v-for="(item, index) in items" :key="index" :value="index">
+          <router-link :to="{ name: item.title.toLowerCase() }">
           <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </router-link>
         </v-list-item>
       </v-list>
     </v-menu>
