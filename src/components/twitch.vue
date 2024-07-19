@@ -10,7 +10,9 @@ export default {
         fetchToken: function () {
             const limes = ["omnimorris",
                 "campslapaa",
+                "chronicallycrafty",
                 "Fireheart20198",
+                "genuinechili",
                 "GoofeeGoobed",
                 "IcedTeaza",
                 "Indie_Outlaw",
@@ -20,10 +22,10 @@ export default {
                 "micro_piglet",
                 "Mistfit__",
                 "MomoiroMilo",
-                "nightowl35",
-                "RayTG_",
                 "rellacthespacenerd",
                 "SilverSlushie",
+                "Ttiratta",
+                "Volitide",
                 "Wilvis0514"]
 
             const client_id = import.meta.env.VITE_CLIENT_ID;
@@ -43,46 +45,66 @@ export default {
                 }).then(data => {
 
                     let whoislive = []
-
-                    for (var key in data.data) {
-                        whoislive.push({
-                            streamtype: data.data[key].type,
-                            streamname: data.data[key].user_name,
-                            streamtitle: data.data[key].title,
-                            gamename: data.data[key].game_name,
-                            thumbnail: data.data[key].thumbnail_url
-                        })
-                        this.whoislive = whoislive
+                    if (data.data.length == 0) {
+                        this.whoislive.push()
                     }
+                    else{
+                        for (var key in data.data) {
 
+                            whoislive.push({
+                                streamtype: data.data[key].type,
+                                streamname: data.data[key].user_name,
+                                streamtitle: data.data[key].title,
+                                gamename: data.data[key].game_name,
+                                thumbnail: data.data[key].thumbnail_url
+                            })
+                            whoislive.forEach(user => {
+
+                                this.whoislive.push({
+                                    streamtype: user.streamtype,
+                                    streamname: user.streamname,
+                                    streamtitle: user.streamtitle,
+                                    gamename: user.gamename,
+                                    thumbnail: user.thumbnail
+                                })
+
+                                return this.whoislive
+                            })
+
+                        }
+                    }
                 })
             }
         }
 
     },
     mounted() {
+
         this.fetchToken()
     }
 }
 </script>
 <template>
+   
     <v-container>
-        Live now on twitch! :
+
         <v-row dense>
-            <v-col cols="12">
-                <div v-for=" users in whoislive">
-                    <v-card variant="tonal" hover>
+            <v-card v-if="whoislive.length == 0"><v-card-title>Oh no 😢</v-card-title><v-card-text>Their are no limes streaming at the moment</v-card-text></v-card>
+            <div v-for="(users, index) in whoislive" :key="index" v-else>
+                <v-col cols="12">
+                    <v-card variant="tonal" hover >
                         <v-card-title>{{ users.streamname }}</v-card-title>
                         <v-card-subtitle>{{ users.gamename }}</v-card-subtitle>
                         <v-card-text>{{ users.streamtitle }}</v-card-text>
                         <v-card-actions>
-                            <a :href="'https://www.twitch.tv/' + users.streamname"
-                                target="_blank"><v-btn>{{ users.streamname }}</v-btn></a>
+                            <a :href="'https://www.twitch.tv/' + users.streamname" target="_blank"><v-btn>{{
+                                    users.streamname }}</v-btn></a>
                         </v-card-actions>
 
                     </v-card>
-                </div>
-            </v-col>
+
+                </v-col>
+            </div>
         </v-row>
     </v-container>
 </template>

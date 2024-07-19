@@ -8,63 +8,96 @@ export default {
     },
     methods: {
         fetchChannel() {
-
+            const limes = ["Omnimorris ",
+                "64lava",
+                "CampSlapaa ",
+                "ChronicallyCrfty ",
+                "GenuineChili",
+                "GoofeeGoobed",
+                "KrystalDad",
+                "Levidmorris",
+                "micropig5",
+                "MomoiroMilo",
+                "TheMrGoob",
+                "Sicksid3534",
+                "SilverSlushie",
+                "Tworata",
+                "VolitideYT ",
+                "Wilvis0514"]
             const api_key = import.meta.env.VITE_YOUTUBE_API;
+            limes.forEach((forHandle) => {
+                const youtubechannelurl = new URL("https://www.googleapis.com/youtube/v3/channels?")
 
-            const youtubechannelurl = new URL("https://www.googleapis.com/youtube/v3/playlistItems")
+                youtubechannelurl.searchParams.set("key", api_key)
+                youtubechannelurl.searchParams.set("part", "contentDetails")
+                youtubechannelurl.searchParams.set("forHandle", forHandle)
 
-            youtubechannelurl.searchParams.set("key", api_key)
+                fetch(youtubechannelurl, {
+                    method: 'get',
 
-            youtubechannelurl.searchParams.set("part", "snippet")
-            youtubechannelurl.searchParams.set("playlistId", "PLLPqZJRXAEj6kEVhrE7gcSZip9a_5usQ4")
+                }).then(function (response) {
+                    return response.json();
+                }).then(data => {
 
-            fetch(youtubechannelurl, {
-                method: 'get',
+                    const items = data.items
 
-            }).then(function (response) {
-                return response.json();
-            }).then(data => {
-                const items = data.items
+                    for (const [key, value] of Object.entries(items)) {
+                        // Extract the videoId from the snippet
 
-                for(const [key, value] of Object.entries(items)){
-                    // Extract the videoId from the snippet
-                    let videoId = value.snippet.resourceId.videoId
-                    this.latestvideo.push({
-                        id: value.id,
-                        position: value.snippet.position,
-                        videoId: videoId,
-                        title: value.title,
-                        publishedAt: value.snippet.publishedAt,
-                        title: value.snippet.title,
-                        description: value.snippet.description,
-                        // Concatenate the video ID with the base URL to get the full video URL
-                        videoUrl: "https://youtu.be/".concat(videoId),
-                        videoEmbedUrl: "https://www.youtube.com/embed/".concat(videoId),
-                        thumbnails: value.snippet.thumbnails,
-                        // TODO: We don't have duration information yet.
-                        duration: "NA",
-                    })
-            };
+                        for (const [k, v] of Object.entries(value.contentDetails)) {
+
+                            let channelId = v.uploads.toString()
+                            const youtubechannelsearch = new URL('https://www.googleapis.com/youtube/v3/playlistItems?')
+                            youtubechannelsearch.searchParams.set("key", api_key)
+                            youtubechannelsearch.searchParams.set("part", "snippet")
+                            youtubechannelsearch.searchParams.set("playlistId",  channelId )
+                            youtubechannelsearch.searchParams.set("maxResults",1)
+
+                            fetch(youtubechannelsearch, {
+                                method: 'get',
+
+                            }).then(function (response) {
+                                return response.json();
+                            }).then(data => {
+                                for(const [key, value] of Object.entries(data.items)) {
+                                    const videoId = value.snippet.resourceId.videoId
+                                this.latestvideo.push({
+                                    id: value.id,
+                                    position: value.snippet.position,
+                                    videoId: videoId,
+                                    title: value.title,
+                                    publishedAt: value.snippet.publishedAt,
+                                    title: value.snippet.title,
+                                    description: value.snippet.description,
+                                    // Concatenate the video ID with the base URL to get the full video URL
+                                    videoUrl: "https://youtu.be/".concat(videoId),
+                                    videoEmbedUrl: "https://www.youtube.com/embed/".concat(videoId),
+                                    thumbnails: value.snippet.thumbnails,
+                                    // TODO: We don't have duration information yet.
+                                    duration: "NA",
+                                })
+                            }
+                            })
+                        }
+                    };
+                })
             })
-
         },
 
     },
     mounted() {
-         this.fetchChannel()
+        this.fetchChannel()
 
     }
 }
 </script>
 <template>
-    <v-infinite-scroll
-    direction="horizontal"
-    @load="empty"
-  >
-    <template v-for="video in latestvideo">
-        <div :class="['pa-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
-        <embed :src="video.videoEmbedUrl"/>
-    </div>
-    </template>
-</v-infinite-scroll>
+    
+    <v-virtual-scroll :height="500" :items="latestvideo">
+        <template v-slot:default="{ item }">
+            <embed :src="item.videoEmbedUrl">
+        </template>
+    </v-virtual-scroll>
+
+
 </template>

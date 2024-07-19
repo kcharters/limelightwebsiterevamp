@@ -5,8 +5,17 @@ import Youtube from "../components/youtube.vue"
 
 </script>
 <template>
+  <v-container>
+    
+      <v-col  class="d-md-inline-flex" >
+        Live now on twitch! :
+        <Twitch />
+      </v-col>
+      <v-col  class="d-md-inline-flex">
+        Latest Youtube Uploads! :
+        <Youtube />
+      </v-col>
 
-  <Youtube/>
-  <Twitch/>
-
+    
+  </v-container>
 </template>

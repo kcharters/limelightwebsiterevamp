@@ -14,7 +14,7 @@ const items = [
 <template>
   <v-app-bar :elevation="24" :density="compact" class="pr-10">
     <template v-slot:prepend>
-      <router-link :to="{ name: 'home' }"><img src="@\assets\ll_logo.png" width="75" height="75vh" /></router-link>
+      <router-link :to="{ name: 'home' }"><img src="@\assets\images\ll_logo.png" width="75wh" height="75vh" /></router-link>
     </template>
     <v-app-bar-title>LimeLight SMP</v-app-bar-title>
 
