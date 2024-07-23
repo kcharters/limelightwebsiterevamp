@@ -83,6 +83,11 @@ export default {
                 })
             })
         },
+        load ({ done }) {
+        setTimeout(() => {
+          done('empty')
+        }, 1000)
+      },
 
     },
     mounted() {
@@ -91,13 +96,19 @@ export default {
     }
 }
 </script>
-<template>
-    
-    <v-virtual-scroll :height="500" :items="latestvideo">
-        <template v-slot:default="{ item }">
-            <embed :src="item.videoEmbedUrl">
-        </template>
-    </v-virtual-scroll>
-
-
+<template> 
+  <v-infinite-scroll
+    height="500"
+    @load="load"
+  >
+    <template v-for="(item, index) in latestvideo" :key="item" :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
+        <embed :src="item.videoEmbedUrl">
+    </template>
+    <template v-slot:empty>
+      <v-alert border="start"
+      border-color="green-darken-1"
+      elevation="2">Check specific lime channels for more!</v-alert>
+    </template>
+  </v-infinite-scroll>
+<!-- <embed :src="item.videoEmbedUrl"> -->
 </template>
