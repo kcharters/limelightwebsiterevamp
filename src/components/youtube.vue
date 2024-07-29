@@ -106,7 +106,7 @@ export default {
     </template>
     <template v-slot:empty>
       <v-alert border="start"
-      border-color="green-darken-1"
+      border-color="#99C61C"
       elevation="2">Check specific lime channels for more!</v-alert>
     </template>
   </v-infinite-scroll>

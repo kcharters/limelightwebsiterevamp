@@ -12,23 +12,36 @@ const items = [
 ]
 </script>
 <template>
-  <v-app-bar :elevation="24" :density="compact" class="pr-10">
+  <v-app-bar :elevation="24" title="Limelight SMP">
     <template v-slot:prepend>
       <router-link :to="{ name: 'home' }"><img src="@\assets\images\ll_logo.png" width="75wh" height="75vh" /></router-link>
     </template>
-    <v-app-bar-title>LimeLight SMP</v-app-bar-title>
-
-    <v-toolbar-items class="hidden-sm-and-down" v-for="(item, index) in items" :key="index" :value="index">
-      <router-link :to="{ name: item.title.toLowerCase() }" class="v-btn">
+      <template v-slot:extension>
+        <v-tabs
+          v-model="tab"
+          align-tabs="title"
+        >
+          <v-tab
+            v-for="(item, index) in items"
+            :key="index"
+            :text="item.title"
+            :value="item"
+            :to="{ name: item.title.toLowerCase() }"
+            class="text-white"
+          ></v-tab>
+        </v-tabs>
+      </template>
+    <!--  <div  v-for="(item, index) in items" :key="index" :value="index" >
+      <router-link :to="{ name: item.title.toLowerCase() }" >
         Limes
-        </router-link>
-
-    </v-toolbar-items>
+      </router-link>
+    </div> -->
+    
 
     <!-- Add a navigation bar -->
     <v-menu v-if="isMobile">
       <template v-slot:activator="{ props }">
-        <v-app-bar-nav-icon color="primary" v-bind="props">
+        <v-app-bar-nav-icon  v-bind="props">
         </v-app-bar-nav-icon>
       </template>
       <v-list>
@@ -45,4 +58,8 @@ const items = [
 
 </template>
 
-<style></style>
+<style>
+.v-btn__content{
+  color:#FDFED3 !important;
+}
+</style>

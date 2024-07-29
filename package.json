@@ -13,7 +13,6 @@
   "dependencies": {
     "@chenfengyuan/vue-countdown": "^2.1.2",
     "@jamescoyle/vue-icon": "^0.1.2",
-    "@mdi/font": "^7.4.47",
     "@mdi/js": "^7.4.47",
     "axios": "^1.7.2",
     "jslint": "^0.12.1",
@@ -25,8 +24,11 @@
     "vuetify": "^3.6.9"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "@gitlab/fonts": "^1.3.0",
+    "@mdi/font": "^7.4.47",
     "@vitejs/plugin-vue": "^5.0.4",
+    "font-awesome": "^4.7.0",
     "vite": "^5.1.6",
     "vite-plugin-singlefile": "^2.0.2",
     "wrangler": "^3.60.2"

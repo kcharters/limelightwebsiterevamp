@@ -1,4 +1,5 @@
 import './assets/main.css'
+import '../node_modules/font-awesome/css/font-awesome.min.css'
 
 import { createApp } from 'vue'
 
@@ -12,20 +13,19 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import { aliases, mdi } from 'vuetify/iconsets/mdi'
-
+import { aliases, fa } from 'vuetify/iconsets/fa4'
 
 const vuetify = createVuetify({
   components,
   directives,
   theme: {
-    defaultTheme: 'dark'
+    disable: true,
   },
   icons: {
-    defaultSet: 'mdi',
+    defaultSet: 'fa',
     aliases,
     sets: {
-      mdi,
+      fa,
     },
   },
 })
