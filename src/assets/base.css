@@ -11,9 +11,12 @@
   font-family: Poppins;
   src: url('@/assets/fonts/Poppins-Regular.ttf')format("truetype");
 }
+.v-application,.v-application__wrap {
+  min-height: 91vh !important;
+}
 
 body {
-  min-height: 100vh;
+  min-height: 75vh;
   transition:
     color 0.5s,
     background-color 0.5s;

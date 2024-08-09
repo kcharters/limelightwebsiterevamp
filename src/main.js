@@ -15,11 +15,23 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import { aliases, fa } from 'vuetify/iconsets/fa4'
 
+// Custom theme properties
+const customDarkTheme = {
+  dark: true,
+  colors: {
+    background: "#303030",
+    surface: "#303030",
+  },
+};
+
 const vuetify = createVuetify({
   components,
   directives,
   theme: {
-    disable: true,
+    defaultTheme: "customDarkTheme",
+    themes: {
+      customDarkTheme,
+    },
   },
   icons: {
     defaultSet: 'fa',

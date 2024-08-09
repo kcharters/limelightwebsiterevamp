@@ -50,8 +50,8 @@ export default {
                             const youtubechannelsearch = new URL('https://www.googleapis.com/youtube/v3/playlistItems?')
                             youtubechannelsearch.searchParams.set("key", api_key)
                             youtubechannelsearch.searchParams.set("part", "snippet")
-                            youtubechannelsearch.searchParams.set("playlistId",  channelId )
-                            youtubechannelsearch.searchParams.set("maxResults",1)
+                            youtubechannelsearch.searchParams.set("playlistId", channelId)
+                            youtubechannelsearch.searchParams.set("maxResults", 1)
 
                             fetch(youtubechannelsearch, {
                                 method: 'get',
@@ -59,35 +59,37 @@ export default {
                             }).then(function (response) {
                                 return response.json();
                             }).then(data => {
-                                for(const [key, value] of Object.entries(data.items)) {
+                                for (const [key, value] of Object.entries(data.items)) {
                                     const videoId = value.snippet.resourceId.videoId
-                                this.latestvideo.push({
-                                    id: value.id,
-                                    position: value.snippet.position,
-                                    videoId: videoId,
-                                    title: value.title,
-                                    publishedAt: value.snippet.publishedAt,
-                                    title: value.snippet.title,
-                                    description: value.snippet.description,
-                                    // Concatenate the video ID with the base URL to get the full video URL
-                                    videoUrl: "https://youtu.be/".concat(videoId),
-                                    videoEmbedUrl: "https://www.youtube.com/embed/".concat(videoId),
-                                    thumbnails: value.snippet.thumbnails,
-                                    // TODO: We don't have duration information yet.
-                                    duration: "NA",
-                                })
-                            }
+                                    const largeThumbnail = value.snippet.thumbnails.standard.url
+                                    this.latestvideo.push({
+                                        id: value.id,
+                                        position: value.snippet.position,
+                                        videoId: videoId,
+                                        title: value.title,
+                                        publishedAt: value.snippet.publishedAt,
+                                        title: value.snippet.title,
+                                        description: value.snippet.description,
+                                        // Concatenate the video ID with the base URL to get the full video URL
+                                        videoUrl: "https://youtu.be/".concat(videoId),
+                                        videoEmbedUrl: "https://www.youtube.com/embed/".concat(videoId),
+                                        thumbnails: largeThumbnail,
+                                        // TODO: We don't have duration information yet.
+                                        duration: "NA",
+                                    })
+
+                                }
                             })
                         }
                     };
                 })
             })
         },
-        load ({ done }) {
-        setTimeout(() => {
-          done('empty')
-        }, 1000)
-      },
+        load({ done }) {
+            setTimeout(() => {
+                done('empty')
+            }, 1000)
+        },
 
     },
     mounted() {
@@ -96,19 +98,18 @@ export default {
     }
 }
 </script>
-<template> 
-  <v-infinite-scroll
-    height="500"
-    @load="load"
-  >
-    <template v-for="(item, index) in latestvideo" :key="item" :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
-        <embed :src="item.videoEmbedUrl">
-    </template>
-    <template v-slot:empty>
-      <v-alert border="start"
-      border-color="#99C61C"
-      elevation="2">Check specific lime channels for more!</v-alert>
-    </template>
-  </v-infinite-scroll>
-<!-- <embed :src="item.videoEmbedUrl"> -->
+<template>
+    <v-container>
+        <v-virtual-scroll :height="160" :width="400" :items="latestvideo">
+            
+        <template v-slot:default="{ item }">
+            <embed :src="item.videoEmbedUrl">
+        </template>
+   
+    </v-virtual-scroll>
+        <!-- <embed :src="item.videoEmbedUrl"> -->
+    </v-container>
 </template>
+<style css scoped>
+
+</style>
