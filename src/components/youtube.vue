@@ -103,13 +103,16 @@ export default {
 };
 </script>
 <template>
-  <v-container>
-    <v-virtual-scroll :height="160" :width="400" :items="latestvideo">
-      <template v-slot:default="{ item }">
-        <embed :src="item.videoEmbedUrl" />
-      </template>
-    </v-virtual-scroll>
-    <!-- <embed :src="item.videoEmbedUrl"> -->
-  </v-container>
+  <v-infinite-scroll height="500" width="350" @load="load">
+    <template v-for="(item, index) in latestvideo" :key="item">
+      <embed :src="item.videoEmbedUrl"  width="325"/>
+    </template>
+    <template v-slot:empty>
+      <v-alert border="start" border-color="green-darken-1" elevation="2"
+        >Check specific lime channels for more!</v-alert
+      >
+    </template>
+  </v-infinite-scroll>
+  <!-- <embed :src="item.videoEmbedUrl"> -->
 </template>
 <style css scoped></style>

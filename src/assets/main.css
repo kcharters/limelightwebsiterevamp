@@ -1,13 +1,14 @@
 @import './base.css';
-:root{
-  --dark-green:#64AA27;
-  --snot-green:#99C61C;
-  --jungle-tan:#D5E563;
-  --vivid-lime-green:#A9E22D;
+
+:root {
+  --dark-green: #64AA27;
+  --snot-green: #99C61C;
+  --jungle-tan: #D5E563;
+  --vivid-lime-green: #A9E22D;
   /*--vt-c-white: #FDFED3;*/
-  --off-white:#FDFED3;
-  --gray:#303030;
-  
+  --off-white: #FDFED3;
+  --gray: #303030;
+
 }
 
 #app {
@@ -15,8 +16,6 @@
   max-height: 50vw;
   padding-top: 4rem;
   font-weight: normal;
-  
-  
 }
 
 a {
@@ -25,18 +24,27 @@ a {
 }
 
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px) {}
+
+.flipper {
+  position: relative;
+  width: 100%;
+  height: 75% !important;
+}
+
+.front {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 75% !important;
 
 }
 
-.flipper{
-  position: relative; width: 100%; height: 75% !important;
-}
-
-.front{
-  position: absolute; top: 0px; left: 0px; width: 100%; height: 75% !important;
-  
-}
-.back{
-  position: absolute; top: 0px; left: 0px; width: 100%; height: 75% !important; 
+.back {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 75% !important;
 }

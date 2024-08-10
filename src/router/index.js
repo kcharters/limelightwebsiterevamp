@@ -13,8 +13,8 @@ const router = createRouter({
     {
       path: '/limes',
       name: 'limes',
-      component: () => import('../views/LimesView.vue')
-     }
+      component: Limes
+    }
   ]
 })
 
