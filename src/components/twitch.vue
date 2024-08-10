@@ -18,7 +18,6 @@ export default {
                 "Indie_Outlaw",
                 "KrystalDad",
                 "Levidmorris",
-                "lordandrilton",
                 "micro_piglet",
                 "Mistfit__",
                 "MomoiroMilo",
