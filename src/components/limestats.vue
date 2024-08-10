@@ -72,31 +72,43 @@ export default {
               width="300px"
               height="400px"
             />
+            <v-card-subtitle class="white--text btn"
+        >Click me</v-card-subtitle>
           </template>
           <template v-slot:back class="back">
-            <img
-              :src="'\\limeskins\\' + lime.name + '.png'"
-              width="300px"
-              height="400px"
-            />
+            <img :src="'\\cards\\' + lime.name + '.png'" width="360px" height="475px" />
           </template>
         </vue-flip>
       </v-card-text>
       <v-card-actions>
         <div v-if="lime.youtube">
           <v-btn
-            icon="fa-youtube"
+            variant="tonal"
+            prepend-icon="fa-youtube"
             :href="'https://www.youtube.com/@' + lime.youtube"
             target="_blank"
           >
+            Youtube
           </v-btn>
         </div>
         <div v-if="lime.twitch">
           <v-btn
-            icon="fa-twitch"
+            variant="tonal"
+            prepend-icon="fa-twitch"
             :href="'https://www.twitch.tv/' + lime.twitch"
             target="_blank"
           >
+            Twitch
+          </v-btn>
+        </div>
+        <div v-if="lime.tiktok">
+          <v-btn
+            prepend-icon="fa-twitch"
+            variant="tonal"
+            :href="'https://tiktok.com/' + lime.tiktok"
+            target="_blank"
+          >
+            TikTok
           </v-btn>
         </div>
       </v-card-actions>
