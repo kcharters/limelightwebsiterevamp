@@ -22,12 +22,12 @@ const isMobile = computed(() => {
           <router-link :to="{ name: 'limes' }"> Limes </router-link>
         </v-btn>
         <v-btn variant="tonal">
-          <a href="https://discord.gg/kjXNbhef5N"> Join the Community Discord </a>
+          <a href="https://discord.gg/kjXNbhef5N" target="_blank"> Join the Community Discord </a>
         </v-btn>
         <v-btn variant="tonal">
           <a
             href="https://www.youtube.com/playlist?list=PLLPqZJRXAEj4Pxb8HudOngnwpyekaxG61&jct=FDp0dZgWD4YdkRN1WmxW7Q"
-          >
+            target="_blank">
             Season 3 Playlist
           </a>
         </v-btn>
@@ -45,12 +45,12 @@ const isMobile = computed(() => {
         <v-list-item>
           <a
             href="https://www.youtube.com/playlist?list=PLLPqZJRXAEj4Pxb8HudOngnwpyekaxG61&jct=FDp0dZgWD4YdkRN1WmxW7Q"
-          >
+            target="_blank">
             S3 Playlist
           </a>
         </v-list-item>
         <v-list-item>
-          <a href="https://discord.gg/kjXNbhef5N"> Discord </a>
+          <a href="https://discord.gg/kjXNbhef5N" target="_blank"> Discord </a>
         </v-list-item>
       </v-list>
     </v-menu>

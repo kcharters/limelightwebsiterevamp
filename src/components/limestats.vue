@@ -9,7 +9,7 @@ export default {
     return {
       limes: [
         { name: "0mnimorris", youtube: "Omnimorris", twitch: "omnimorris" },
-        { name: "64Lava", youtube: "64lava" },
+        { name: "64Lava", youtube: "64lava", twitch:"swimlava" },
         { name: "BiklePlays", youtube: "BiklePlays" },
         { name: "BurningSkul1", youtube: "BurningSkul1" },
         { name: "CampSlapaa", youtube: "CampSlapaa ", twitch: "campslapaa" },
@@ -19,11 +19,10 @@ export default {
           twitch: "chronicallycrafty",
         },
         { name: "Fireheart20198", twitch: "Fireheart20198" },
-        { name: "Goofeegoobed", youtube: "GoofeeGoobed", twitch: "GoofeeGoobed" },
         { name: "GenuineChili", youtube: "GenuineChili" },
+        { name: "Goofeegoobed", youtube: "GoofeeGoobed", twitch: "GoofeeGoobed" },
         { name: "IcedTeaza", youtube: "IcedTeaza ", twitch: "IcedTeaza" },
         { name: "Indie_Outlaw", twitch: "Indie_Outlaw" },
-        { name: "Koska", youtube: "koskaLCMER" },
         { name: "KrystalDad", youtube: "KrystalDad ", twitch: "KrystalDad" },
         { name: "Levidmorris", youtube: "Levidmorris", twitch: "Levidmorris" },
         {

@@ -24,6 +24,7 @@ export default {
         "MomoiroMilo",
         "rellacthespacenerd",
         "SilverSlushie",
+        "swimlava",
         "Ttiratta",
         "Volitide",
         "Wilvis0514",
@@ -93,7 +94,7 @@ export default {
     >
     <div v-for="(users, index) in whoislive" :key="index" v-else>
       <v-col cols="12">
-        <v-card variant="tonal" hover>
+        <v-card width="316px">
           <v-card-title>{{ users.streamname }}</v-card-title>
           <v-card-subtitle>{{ users.gamename }}</v-card-subtitle>
           <v-card-text>{{ users.streamtitle }} </v-card-text>
