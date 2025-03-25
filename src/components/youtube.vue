@@ -11,18 +11,21 @@ export default {
       const limes = [
         "Omnimorris ",
         "64lava",
+        "BiklePlays",
         "CampSlapaa ",
         "ChronicallyCrfty ",
+        "colourtongue",
+        "Dekoba",
         "GenuineChili",
         "GoofeeGoobed",
         "KrystalDad",
+        "JollyOldMaeYT",
         "Levidmorris",
-        "micropig5",
         "MomoiroMilo",
         "TheMrGoob",
+        "YourPalPal",
         "Sicksid3534",
-        "SilverSlushie",
-        "Tworata",
+        "TirataMC",
         "VolitideYT ",
         "Wilvis0514",
       ];
@@ -78,13 +81,12 @@ export default {
 </script>
 <template>
   <v-infinite-scroll height="500" width="350" @load="load">
-    <template v-for="(item, index) in latestvideo" :key="item">
+    <template v-for="(item, index) in latestvideo.slice().reverse()" :key="item">
       <embed :src="item.videoEmbedUrl" width="325" />
     </template>
     <template v-slot:empty>
-      <v-alert border="start" border-color="green-darken-1" elevation="2"
-        >Check specific lime channels for more!</v-alert
-      >
+      <v-alert border="start" border-color="green-darken-1" elevation="2">Check specific lime channels for
+        more!</v-alert>
     </template>
   </v-infinite-scroll>
   <!-- <embed :src="item.videoEmbedUrl"> -->

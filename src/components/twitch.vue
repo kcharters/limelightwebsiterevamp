@@ -10,24 +10,23 @@ export default {
     fetchToken: function () {
       const limes = [
         "omnimorris",
-        "campslapaa",
+        "thatslapsmc",
         "chronicallycrafty",
         "Fireheart20198",
         "genuinechili",
         "GoofeeGoobed",
-        "IcedTeaza",
         "Indie_Outlaw",
         "KrystalDad",
         "Levidmorris",
-        "micro_piglet",
-        "Mistfit__",
         "MomoiroMilo",
-        "rellacthespacenerd",
-        "SilverSlushie",
         "swimlava",
         "Ttiratta",
         "Volitide",
         "Wilvis0514",
+        "raytg_",
+        "jollyoldmae",
+        "colourtongue",
+        "bikleplays"
       ];
 
       const client_id = import.meta.env.VITE_CLIENT_ID;
@@ -88,10 +87,8 @@ export default {
 </script>
 <template>
   <v-row dense>
-    <v-card v-if="whoislive.length == 0"
-      ><v-card-title>Oh no 😢</v-card-title
-      ><v-card-text>Their are no limes streaming at the moment</v-card-text></v-card
-    >
+    <v-card v-if="whoislive.length == 0"><v-card-title>Oh no 😢</v-card-title><v-card-text>Their are no limes streaming
+        at the moment</v-card-text></v-card>
     <div v-for="(users, index) in whoislive" :key="index" v-else>
       <v-col cols="12">
         <v-card width="316px">
@@ -100,9 +97,8 @@ export default {
           <v-card-text>{{ users.streamtitle }} </v-card-text>
 
           <v-card-actions>
-            <a :href="'https://www.twitch.tv/' + users.streamname" target="_blank"
-              ><img :src="users.thumbnail" /><v-btn>Watch Here!</v-btn></a
-            >
+            <a :href="'https://www.twitch.tv/' + users.streamname" target="_blank"><img
+                :src="users.thumbnail" /><v-btn>Watch Here!</v-btn></a>
           </v-card-actions>
         </v-card>
       </v-col>
