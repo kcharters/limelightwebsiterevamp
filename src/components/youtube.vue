@@ -37,7 +37,7 @@ export default {
       );
       youtubechannelsearch.searchParams.set("key", api_key);
       youtubechannelsearch.searchParams.set("part", "snippet");
-      youtubechannelsearch.searchParams.set("playlistId", "PLLPqZJRXAEj4Pxb8HudOngnwpyekaxG61");
+      youtubechannelsearch.searchParams.set("playlistId", "PLLPqZJRXAEj54NmXieetWPIB9_2lJp2Ew");
       youtubechannelsearch.searchParams.set("maxResults", 50);
 
       fetch(youtubechannelsearch, {

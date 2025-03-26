@@ -10,6 +10,7 @@ export default {
       limes: [
         { name: "0mnimorris", youtube: "Omnimorris", twitch: "omnimorris" },
         { name: "64Lava", youtube: "64lava" },
+        { name: "Azrias", youtube: "", twitch: "" },
         { name: "BiklePlays", youtube: "BiklePlays" },
         { name: "ChronicallyCrafty", youtube: "ChronicallyCrfty ", twitch: "chronicallycrafty" },
         { name: "Colour", youtube: "colourtongue", twitch: "colourtongue" },
