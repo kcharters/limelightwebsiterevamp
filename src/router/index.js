@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Limes from '../views/LimesView.vue'
+import Content from '../views/ContentView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,9 +11,9 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/limes',
-      name: 'limes',
-      component: Limes
+      path: '/content',
+      name: 'content',
+      component: Content
     }
   ]
 })
