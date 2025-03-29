@@ -28,6 +28,7 @@ export default {
         "TirataMC",
         "VolitideYT ",
         "Wilvis0514",
+        "SilverSlushie",
       ];
 
       const api_key = import.meta.env.VITE_YOUTUBE_API;
@@ -37,7 +38,10 @@ export default {
       );
       youtubechannelsearch.searchParams.set("key", api_key);
       youtubechannelsearch.searchParams.set("part", "snippet");
-      youtubechannelsearch.searchParams.set("playlistId", "PLLPqZJRXAEj54NmXieetWPIB9_2lJp2Ew");
+      youtubechannelsearch.searchParams.set(
+        "playlistId",
+        "PLLPqZJRXAEj54NmXieetWPIB9_2lJp2Ew"
+      );
       youtubechannelsearch.searchParams.set("maxResults", 50);
 
       fetch(youtubechannelsearch, {
@@ -85,8 +89,9 @@ export default {
       <embed :src="item.videoEmbedUrl" width="325" />
     </template>
     <template v-slot:empty>
-      <v-alert border="start" border-color="green-darken-1" elevation="2">Check specific lime channels for
-        more!</v-alert>
+      <v-alert border="start" border-color="green-darken-1" elevation="2"
+        >Check specific lime channels for more!</v-alert
+      >
     </template>
   </v-infinite-scroll>
   <!-- <embed :src="item.videoEmbedUrl"> -->
