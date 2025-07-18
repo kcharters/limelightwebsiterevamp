@@ -2,7 +2,7 @@
 import Limes from "../components/limestats.vue";
 </script>
 <template>
-  <v-container>
+  <v-container fluid="false" class="pt-8">
     <Limes />
   </v-container>
 </template>
