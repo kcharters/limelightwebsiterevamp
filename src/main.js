@@ -13,7 +13,10 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import { aliases, fa } from 'vuetify/iconsets/fa4'
+import { aliases, mdi } from 'vuetify/iconsets/mdi';
+import { fa } from 'vuetify/iconsets/fa';
+import '@mdi/font/css/materialdesignicons.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 // Custom theme properties
 const customDarkTheme = {
@@ -34,9 +37,10 @@ const vuetify = createVuetify({
     },
   },
   icons: {
-    defaultSet: 'fa',
+    defaultSet: 'mdi',
     aliases,
     sets: {
+      mdi,
       fa,
     },
   },

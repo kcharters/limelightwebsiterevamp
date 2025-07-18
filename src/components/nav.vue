@@ -1,62 +1,71 @@
-<script setup>
-import { computed, unref } from "vue";
-import { useDisplay } from "vuetify";
-
-const display = useDisplay();
-const isMobile = computed(() => {
-  return unref(display.smAndDown);
-});
-</script>
 <template>
-  <v-app-bar :elevation="24">
+  <v-app-bar app color="bgColor" elevate-on-scroll class="px-4">
+    <!-- Logo + Title -->
     <template v-slot:prepend>
-      <router-link :to="{ name: 'home' }"><img src="@\assets\images\ll_logo.png" width="75wh"
-          height="75vh" /></router-link>
+      <router-link to="/" class="flex items-center gap-2 text-decoration-none" aria-label="Limelight SMP">
+        <v-img :src="logo" alt="Limelight SMP Logo" width="40" height="40" />
+        <span class="hidden sm:inline-block text-2xl font-bold text-accent-one">
+          Limelight SMP
+        </span>
+      </router-link>
     </template>
 
-    <v-app-bar-title><router-link :to="{ name: 'home' }">Limelight SMP</router-link>
-      <div v-if="!isMobile" class="v-btn">
-        <v-btn variant="tonal">
-          <router-link :to="{ name: 'content' }"> content </router-link>
-        </v-btn>
-        <v-btn variant="tonal">
-          <a href="https://discord.gg/kjXNbhef5N" target="_blank"> Join the Community Discord </a>
-        </v-btn>
-        <v-btn variant="tonal">
-          <a href="https://www.youtube.com/playlist?list=PLLPqZJRXAEj54NmXieetWPIB9_2lJp2Ew" target="_blank">
-            S4 Playlist
-          </a>
-        </v-btn>
-      </div>
-    </v-app-bar-title>
-    <!-- Add a navigation bar -->
-    <v-menu v-if="isMobile">
-      <template v-slot:activator="{ props }">
-        <v-app-bar-nav-icon v-bind="props"> </v-app-bar-nav-icon>
-      </template>
-      <v-list>
-        <v-list-item>
-          <router-link :to="{ name: 'content' }"> content </router-link>
-        </v-list-item>
-        <v-list-item>
-          <a href="https://www.youtube.com/playlist?list=PLLPqZJRXAEj54NmXieetWPIB9_2lJp2Ew" target="_blank">
-            S4 Playlist
-          </a>
-        </v-list-item>
-        <v-list-item>
-          <a href="https://discord.gg/kjXNbhef5N" target="_blank"> Discord </a>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center gap-4">
+      <router-link v-for="link in menuLinks" :key="link.path" :to="link.path"
+        class="text-sm font-medium hover:underline underline-offset-2"
+        :aria-current="$route.path === link.path ? 'page' : false">
+        {{ link.title }}
+      </router-link>
+
+      <router-link to="/posts/citrus-docs/intro/"
+        class="flex h-8 items-center rounded-lg bg-accent-base/5 px-4 text-accent-base text-sm font-medium hover:bg-accent-base/10">
+        Docs
+      </router-link>
+
+      <ThemeToggle />
+    </div>
+
+    <!-- Mobile Menu Toggle Button -->
+    <v-btn icon class="md:hidden" @click="drawerOpen = !drawerOpen">
+      <v-icon>{{ drawerOpen ? 'mdi-close' : 'mdi-menu' }}</v-icon>
+    </v-btn>
   </v-app-bar>
+
+  <!-- Mobile Drawer -->
+  <v-navigation-drawer v-model="drawerOpen" temporary right class="bg-bgColor">
+    <v-list class="text-center">
+      <v-list-item v-for="link in menuLinks" :key="link.path" :to="link.path" link @click="drawerOpen = false">
+        <v-list-item-title class="text-lg font-medium">
+          {{ link.title }}
+        </v-list-item-title>
+      </v-list-item>
+
+      <v-list-item to="/posts/citrus-docs/intro/" link @click="drawerOpen = false">
+        <v-list-item-title class="text-lg font-medium">
+          Docs
+        </v-list-item-title>
+      </v-list-item>
+
+      <div class="mt-4">
+        <ThemeToggle />
+      </div>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
-<style>
-.v-btn__content {
-  color: #fdfed3 !important;
-}
+<script setup>
+import { ref } from 'vue';
+import ThemeToggle from './ThemeToggle.vue';
+import logo from '@/assets/images/ll_logo.png';
 
-.v-btn {
-  margin-left: 10px;
-}
-</style>
+const drawerOpen = ref(false);
+
+const menuLinks = [
+  { path: '/', title: 'Home' },
+  { path: '/about', title: 'About' },
+  { path: '/blog', title: 'Blog' },
+  { path: '/notes', title: 'Notes' },
+];
+</script>

@@ -40,19 +40,13 @@ export default {
     };
   },
   methods: {},
-  mounted() {},
+  mounted() { },
 };
 </script>
 <template>
   <v-row dense>
-    <v-card
-      v-for="(lime, index) of limes"
-      :key="index + lime.name"
-      elevation="16"
-      width="416px"
-      height="583px"
-      class="d-flex flex-column"
-    >
+    <v-card v-for="(lime, index) of limes" :key="index + lime.name" elevation="16" width="416px" height="583px"
+      class="d-flex flex-column">
       <v-card-title>{{ lime.name }}</v-card-title>
       <v-card-text class="card-img-top">
         <vue-flip :active-click="true">
@@ -60,42 +54,26 @@ export default {
             <img :src="'\\cards\\' + lime.name + '.png'" width="360px" height="475px" />
           </template>
           <template v-slot:back class="back">
-            <img
-              :src="'\\limeskins\\' + lime.name + '.png'"
-              width="300px"
-              height="400px"
-            />
+            <img :src="'\\limeskins\\' + lime.name + '.png'" width="300px" height="400px" />
           </template>
         </vue-flip>
       </v-card-text>
       <v-card-actions>
         <div v-if="lime.youtube">
-          <v-btn
-            variant="tonal"
-            prepend-icon="fa-youtube"
-            :href="'https://www.youtube.com/@' + lime.youtube"
-            target="_blank"
-          >
+          <v-btn variant="tonal" :href="'https://www.youtube.com/@' + lime.youtube" target="_blank">
+            <i class="fa-brands fa-youtube mr-2"></i>
             Youtube
           </v-btn>
         </div>
         <div v-if="lime.twitch">
-          <v-btn
-            variant="tonal"
-            prepend-icon="fa-twitch"
-            :href="'https://www.twitch.tv/' + lime.twitch"
-            target="_blank"
-          >
+          <v-btn variant="tonal" :href="'https://www.twitch.tv/' + lime.twitch" target="_blank">
+            <i class="fa-brands fa-twitch mr-2"></i>
             Twitch
           </v-btn>
         </div>
         <div v-if="lime.tiktok">
-          <v-btn
-            prepend-icon="fa-twitch"
-            variant="tonal"
-            :href="'https://tiktok.com/' + lime.tiktok"
-            target="_blank"
-          >
+          <v-btn variant="tonal" :href="'https://tiktok.com/' + lime.tiktok" target="_blank">
+            <i class="fa-brands fa-tiktok mr-2"></i>
             TikTok
           </v-btn>
         </div>
@@ -103,8 +81,13 @@ export default {
     </v-card>
   </v-row>
 </template>
+
 <style>
 .front {
   cursor: pointer;
+}
+
+img {
+  border-radius: 8px;
 }
 </style>

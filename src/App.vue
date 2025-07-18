@@ -6,11 +6,11 @@ import Nav from "./components/nav.vue";
 
 <template>
     <v-app>
+
         <Nav />
         <RouterView />
+
     </v-app>
 </template>
 
-<style css>
-
-</style>
+<style css></style>

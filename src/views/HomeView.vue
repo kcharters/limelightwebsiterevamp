@@ -2,7 +2,9 @@
 import Limes from "../components/limestats.vue";
 </script>
 <template>
-  <Limes />
+  <v-container>
+    <Limes />
+  </v-container>
 </template>
 <style>
 .smaller {
