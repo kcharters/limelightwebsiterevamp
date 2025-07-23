@@ -1,9 +1,10 @@
 <template>
   <div class="youtube-feed">
     <div class="scroll-container">
-      <div v-for="(item, index) in allVideos" :key="item.videoId" class="video-card" @click="openVideo(item.videoUrl)">
+      <div v-for="(item, index) in allVideos" :key="item.videoId" class="video-card " @click="openVideo(item.videoUrl)">
         <img :src="item.thumbnail" class="thumbnail" :alt="item.title" />
-        <div class="title">{{ item.title }}</div>
+        <div class="title text-body1" :style="{ backgroundColor: 'rgb(var(--v-theme-background))' }">{{ item.title }}
+        </div>
       </div>
     </div>
   </div>
@@ -71,7 +72,7 @@ export default {
 
 <style scoped>
 .scroll-container {
-  max-height: 600px;
+  max-height: 500px;
   /* You can change this */
   overflow-y: auto;
   padding-right: 8px;
@@ -80,7 +81,7 @@ export default {
 }
 
 .section-title {
-  color: white;
+  color: #FDFED3;
   font-weight: 600;
   margin-bottom: 1rem;
   text-align: center;
@@ -92,7 +93,7 @@ export default {
   margin-bottom: 1rem;
   border-radius: 8px;
   overflow: hidden;
-  background: #2c2c2c;
+  background: #303030;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -112,8 +113,6 @@ export default {
 .title {
   padding: 0.6rem;
   font-size: 0.95rem;
-  color: #fff;
   text-align: center;
-  background: #1f1f1f;
 }
 </style>

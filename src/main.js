@@ -1,5 +1,5 @@
-import './assets/main.css'
 import '../node_modules/font-awesome/css/font-awesome.min.css'
+import './assets/main.css'
 
 import { createApp } from 'vue'
 
@@ -7,25 +7,17 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-
 // Vuetify
-import 'vuetify/styles'
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@mdi/font/css/materialdesignicons.css'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import { aliases, mdi } from 'vuetify/iconsets/mdi';
-import { fa } from 'vuetify/iconsets/fa';
-import '@mdi/font/css/materialdesignicons.css';
-import '@fortawesome/fontawesome-free/css/all.css';
+import { fa } from 'vuetify/iconsets/fa'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
+import 'vuetify/styles'
 
-// Custom theme properties
-const customDarkTheme = {
-  dark: true,
-  colors: {
-    background: "#303030",
-    surface: "#303030",
-  },
-};
+import { customDarkTheme, customLightTheme } from './theme.js'
 
 const vuetify = createVuetify({
   components,
@@ -34,6 +26,7 @@ const vuetify = createVuetify({
     defaultTheme: "customDarkTheme",
     themes: {
       customDarkTheme,
+      customLightTheme,
     },
   },
   icons: {

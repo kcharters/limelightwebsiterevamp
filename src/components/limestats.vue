@@ -10,7 +10,6 @@ export default {
       limes: [
         { name: "0mnimorris", youtube: "Omnimorris", twitch: "omnimorris" },
         { name: "64Lava", youtube: "64lava" },
-        { name: "Azrias", youtube: "", twitch: "" },
         { name: "BiklePlays", youtube: "BiklePlays" },
         {
           name: "ChronicallyCrafty",
@@ -23,7 +22,6 @@ export default {
         { name: "GenuineChili", youtube: "GenuineChili" },
         { name: "Goofeegoobed", youtube: "GoofeeGoobed", twitch: "GoofeeGoobed" },
         { name: "Indie_Outlaw", twitch: "Indie_Outlaw" },
-        { name: "KrystalDad", youtube: "KrystalDad ", twitch: "KrystalDad" },
         { name: "Levidmorris", youtube: "Levidmorris", twitch: "Levidmorris" },
         { name: "MommaJolly", youtube: "JollyOldMaeYT", twitch: "jollyoldmae" },
         { name: "Momoiromilo", youtube: "MomoiroMilo", tiktok: "MomoiroMilo" },
@@ -31,7 +29,6 @@ export default {
         { name: "Pal", youtube: "YourPalPal", twitch: "yourpalpal" },
         { name: "Ray", youtube: "RayTG_", twitch: "raytg_" },
         { name: "SickSid", youtube: "Sicksid3534" },
-        { name: "SilverSlushie", youtube: "SilverSlushie", twitch: "SilverSlushie " },
         { name: "ThatSlaps", youtube: "campslapaa", twitch: "thatslapsmc" },
         { name: "Tirata", youtube: "TirataMC", twitch: "Ttiratta" },
         { name: "Volitide", youtube: "VolitideYT", twitch: "Volitide" },

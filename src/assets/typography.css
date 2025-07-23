@@ -1,0 +1,88 @@
+/* typography.css */
+
+/* Headings */
+.text-h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 3.5rem;
+}
+
+.text-h2 {
+    font-size: 2.25rem;
+    font-weight: 600;
+    line-height: 2.75rem;
+}
+
+.text-h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 2.25rem;
+}
+
+.text-h4 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 2rem;
+}
+
+.text-h5 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.75rem;
+}
+
+.text-h6 {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+}
+
+/* Body text */
+.text-body1 {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+}
+
+.text-body2 {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+}
+
+/* Subtitles */
+.text-subtitle1 {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+}
+
+.text-subtitle2 {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+}
+
+/* Buttons */
+.text-button {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1rem;
+    text-transform: uppercase;
+}
+
+/* Captions */
+.text-caption {
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1rem;
+}
+
+/* Overline */
+.text-overline {
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
