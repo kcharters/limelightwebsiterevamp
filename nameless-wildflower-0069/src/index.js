@@ -1,11 +1,10 @@
 import * as jwt from "@tsndr/cloudflare-worker-jwt";
 
 const CORS_HEADERS = {
-	"Access-Control-Allow-Origin": "https://limelightsmp.com", // Change to "*" for testing
+	"Access-Control-Allow-Origin": "*",//"https://limelightsmp.com", // Change to "*" for testing
 	"Access-Control-Allow-Methods": "GET, POST, OPTIONS",
 	"Access-Control-Allow-Headers": "Content-Type",
 };
-const privateKey = env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n');
 
 export default {
 	async fetch(request, env) {
@@ -54,6 +53,7 @@ async function getAccessToken(env) {
 		exp: now + 3600,
 		scope: "https://www.googleapis.com/auth/datastore",
 	};
+	const privateKey = env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n');
 	const signedJwt = await jwt.sign(jwtPayload, privateKey, {
 		algorithm: 'RS256',
 		header: {
@@ -67,7 +67,7 @@ async function getAccessToken(env) {
 		headers: { "Content-Type": "application/x-www-form-urlencoded" },
 		body: `grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=${signedJwt}`,
 	});
-
+	console.log("Access Token Response:", data);
 	const data = await response.json();
 	return data.access_token;
 }
