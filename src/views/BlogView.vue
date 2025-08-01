@@ -13,7 +13,7 @@ onMounted(async () => {
 
 <template>
     <v-container>
-        <h4 class="text-h4 mb-4">Blog</h4>
+        <h1 class="text-h2 mb-4">Blog</h1>
 
         <v-progress-circular v-if="loading" indeterminate color="primary" />
 

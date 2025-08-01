@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server:{
+  server: {
     proxy: {
       '/api': 'http://localhost:5173',
     },
@@ -16,5 +16,13 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  optimizeDeps: {
+    exclude: ['ci-info']
+  },
+  esbuild: {
+    loader: 'js',
+    include: /.*\.(js|ts)$/,
+    exclude: /.*\.d\.ts$/
   }
 })
