@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAxrir49sZJiksk1UjfgUgr0-HYw2eMRAk",
-    authDomain: "limelightwebsiteblog.firebaseapp.com",
-    projectId: "limelightwebsiteblog",
-    storageBucket: "limelightwebsiteblog.firebasestorage.app",
-    messagingSenderId: "664920712535",
-    appId: "1:664920712535:web:64a117936353e8f04f4a12",
-    measurementId: "G-5TGD0XY62V"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DB_URL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
