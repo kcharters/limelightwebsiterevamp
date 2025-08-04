@@ -20,10 +20,10 @@ onMounted(async () => {
         <v-row v-else>
             <v-col v-for="post in posts" :key="post.sys.id" cols="12" md="6" lg="4">
                 <v-card>
-                    <v-img v-if="post.fields.coverImage?.fields?.file?.url"
-                        :src="'https:' + post.fields.coverImage.fields.file.url" height="200" cover />
+                    <v-img v-if="post.fields.featuredImage?.fields?.file?.url"
+                        :src="'https:' + post.fields.featuredImage.fields.file.url" height="200" cover />
                     <v-card-title>{{ post.fields.title }}</v-card-title>
-                    <v-card-text>{{ post.fields.excerpt }}</v-card-text>
+                    <v-card-text>{{ post.fields.shortDescription }}</v-card-text>
                     <v-card-actions>
                         <v-btn :to="`/blog/${post.fields.slug}`" variant="outlined" color="primary">
                             Read More

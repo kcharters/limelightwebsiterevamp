@@ -7,17 +7,15 @@
                 <div v-else-if="post">
                     <!-- Blog Title -->
                     <h1 class="text-h3 font-bold mb-4">{{ post.fields.title }}</h1>
-                    <!-- Author -->
-                    <p>{{ post.fields.author }}</p>
-                    <!-- Publish Date -->
-                    <p>{{ post.fields.publishDate }}</p>
-                    <!-- Blog Summary -->
-                    <p class="text-body-1 mb-6">{{ post.fields.subtitile }}</p>
 
                     <!-- Blog Image -->
                     <v-img v-if="post.fields.featuredImage?.fields?.file?.url"
                         :src="'https:' + post.fields.featuredImage.fields.file.url" alt="Blog Image" class="mb-6"
                         max-height="400" cover />
+                    <!-- Author -->
+                    <p>Author: {{ post.fields.author }}</p>
+                    <!-- Publish Date -->
+                    <p>Date Published: {{ post.fields.publishedDate }}</p>
 
                     <!-- Blog Content (Markdown) -->
                     <MarkdownRenderer :content="post.fields.content" />
