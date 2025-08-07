@@ -41,7 +41,7 @@ const vuetify = createVuetify({
 })
 
 createApp(App).use(router).use(vuetify).use(VueReCaptcha, {
-  siteKey: import.meta.env.RECAPTCHA_SECRET, // from Google reCAPTCHA v3
+  siteKey: '6LfZco8rAAAAAI0CU15rSfBuy8F2Pq-r7Htxpduq', // from Google reCAPTCHA v3
   loaderOptions: {
     autoHideBadge: true,
   },

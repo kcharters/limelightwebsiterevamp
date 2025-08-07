@@ -28,6 +28,7 @@ async function getSlug(request) {
 
 export default {
   async fetch(request, env) {
+    console.log("PRIVATE_KEY exists?", !!env.FIREBASE_PRIVATE_KEY);
     try {
       const url = new URL(request.url);
       const path = url.pathname;
@@ -62,7 +63,6 @@ export default {
   },
 };
 
-// --- Firestore Access Token ---
 async function getAccessToken(env) {
   const now = Math.floor(Date.now() / 1000);
   const jwtPayload = {
@@ -73,9 +73,17 @@ async function getAccessToken(env) {
     exp: now + 3600,
     scope: "https://www.googleapis.com/auth/datastore",
   };
-  const privateKey = cleanPrivateKey(env);
 
-  const signedJwt = await jwt.sign(jwtPayload, privateKey);
+  const privateKey = env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n');
+
+  const signedJwt = await jwt.sign(jwtPayload, privateKey, {
+    algorithm: "RS256",
+    header: {
+      alg: "RS256",
+      typ: "JWT",
+    },
+  });
+
   const response = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -83,10 +91,18 @@ async function getAccessToken(env) {
   });
 
   const data = await response.json();
+  console.log("Access token response:", data);
+
+  if (!response.ok) {
+    throw new Error(data.error_description || data.error || "Failed to get access token");
+  }
+
   return data.access_token;
 }
 
+
 // --- Ensure Post Document Exists ---
+
 async function ensurePostDocument(slug, env, accessToken) {
   const postDocUrl = `https://firestore.googleapis.com/v1/projects/${env.FIREBASE_PROJECT_ID}/databases/(default)/documents/posts/${slug}`;
   const res = await fetch(postDocUrl, {
@@ -109,63 +125,84 @@ async function ensurePostDocument(slug, env, accessToken) {
 
 // --- Handle Comments ---
 async function handleComment(request, env) {
-  const { name, email, message, token } = await request.json();
-  const slug = await getSlug(request);
+  try {
+    const body = await request.clone().json();
+    console.log("Received comment payload:", body);
 
-  if (!slug) {
-    return new Response(JSON.stringify({ error: "Missing slug" }), {
-      status: 400,
-      headers: CORS_HEADERS,
+    const { slug, name, email, message, token } = body;
+
+    if (!slug || !token) {
+      console.log("Missing slug or token");
+      return new Response(JSON.stringify({ error: "Missing slug or token" }), {
+        status: 400,
+        headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      });
+    }
+
+    // Verify reCAPTCHA
+    const recaptchaRes = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${env.RECAPTCHA_SECRET}&response=${token}`,
+      { method: "POST" }
+    );
+    const verifyData = await recaptchaRes.json();
+    console.log("reCAPTCHA response:", verifyData);
+
+    if (
+      !verifyData.success ||
+      verifyData.action !== "submit_comment" ||
+      verifyData.score < 0.5
+    ) {
+      console.log("reCAPTCHA failed:", verifyData);
+      return new Response(JSON.stringify({ error: "Invalid reCAPTCHA" }), {
+        status: 400,
+        headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      });
+    }
+
+    const accessToken = await getAccessToken(env);
+    await ensurePostDocument(slug, env, accessToken);
+
+    // Add comment to Firestore
+    const url = `https://firestore.googleapis.com/v1/projects/${env.FIREBASE_PROJECT_ID}/databases/(default)/documents/posts/${slug}/comments?documentId=${Date.now()}`;
+    const firestoreBody = {
+      fields: {
+        name: { stringValue: name },
+        email: { stringValue: email },
+        message: { stringValue: message },
+        timestamp: { timestampValue: new Date().toISOString() },
+      },
+    };
+
+    const firestoreRes = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(firestoreBody),
     });
-  }
 
-  const accessToken = await getAccessToken(env);
-  await ensurePostDocument(slug, env, accessToken);
+    if (!firestoreRes.ok) {
+      const errorText = await firestoreRes.text();
+      console.log("Firestore error:", errorText);
+      return new Response(errorText, {
+        status: firestoreRes.status,
+        headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      });
+    }
 
-  // Verify reCAPTCHA
-  const verifyResponse = await fetch(
-    `https://www.google.com/recaptcha/api/siteverify?secret=${env.RECAPTCHA_SECRET}&response=${token}`,
-    { method: "POST" }
-  );
-  const verifyData = await verifyResponse.json();
-  if (!verifyData.success) {
-    return new Response(JSON.stringify({ error: "Invalid reCAPTCHA" }), {
-      status: 400,
+    return new Response(JSON.stringify({ success: true }), {
+      headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+    });
+  } catch (err) {
+    console.error("Error in handleComment:", err.stack || err.message || err);
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
+      status: 500,
       headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
     });
   }
-
-  // Add comment
-  const url = `https://firestore.googleapis.com/v1/projects/${env.FIREBASE_PROJECT_ID}/databases/(default)/documents/posts/${slug}/comments?documentId=${Date.now()}`;
-  const body = {
-    fields: {
-      name: { stringValue: name },
-      email: { stringValue: email },
-      message: { stringValue: message },
-      timestamp: { timestampValue: new Date().toISOString() },
-    },
-  };
-
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!res.ok) {
-    return new Response(await res.text(), {
-      status: res.status,
-      headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
-    });
-  }
-
-  return new Response(JSON.stringify({ success: true }), {
-    headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
-  });
 }
+
 
 // --- Get Comments ---
 async function getComments(request, env) {
